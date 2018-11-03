@@ -23,26 +23,26 @@ class Blog(db.Model):
 def index():
 
     if request.method == 'POST':
-        entry_name = request.form['entry']
-        new_entry = Blog(entry_name)
-        db.session.add(new_entry)
+        blog_name = request.form['blog']
+        new_blog = Blog(blog_name)
+        db.session.add(new_blog)
         db.session.commit()
 
 # Change template name
 
     entries = Blog.query.filter_by(completed=False).all()
-    completed_entries = Blog.query.filter_by(completed=True).all()
+    completed_tasks = Blog.query.filter_by(completed=True).all()
     return render_template('entries.html',title="Build a Blog!", 
-        entries=entries, completed_entries=completed_entries)
+        tasks=tasks, completed_tasks=completed_tasks)
 
 
-@app.route('/delete-entry', methods=['POST'])
-def delete_entry():
+@app.route('/delete-task', methods=['POST'])
+def delete_task():
 
-    entry_id = int(request.form['entry-id'])
-    entry = Entry.query.get(entry_id)
-    entry.completed = True
-    db.session.add(entry)
+    task_id = int(request.form['task-id'])
+    task = Task.query.get(task_id)
+    task.completed = True
+    db.session.add(task)
     db.session.commit()
 
     return redirect('/')
