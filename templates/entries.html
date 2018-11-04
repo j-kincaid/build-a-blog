@@ -5,20 +5,20 @@
     <form method='post'>
         <label>
             New Blog:
-            <input type="text" name='entry' />
+            <input type="text" name='task' />
         </label>
         <input type="submit" value='Add Entry' />
     </form>
 
     <hr />
 
-    {% if entry|length == 0 %}
+    {% if task|length == 0 %}
     <p>No entries yet</p>
     {% else %}
 
         <ul>
             {% for entry in entries %}
-            <li>{{entry}}</li>
+            <li>{{task}}</li>
             {% endfor %}
         </ul>
 

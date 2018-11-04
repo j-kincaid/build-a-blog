@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:introducingKat@localhost:8889/build-a-blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:introducingKat@localhost:8888/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
@@ -30,7 +30,7 @@ def index():
 
 # Change template name
 
-    entries = Blog.query.filter_by(completed=False).all()
+    tasks = Blog.query.filter_by(completed=False).all()
     completed_tasks = Blog.query.filter_by(completed=True).all()
     return render_template('entries.html',title="Build a Blog!", 
         tasks=tasks, completed_tasks=completed_tasks)
