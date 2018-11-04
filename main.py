@@ -1,11 +1,35 @@
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+
+# TODO: When a user submits a new post, redirect them to the main blog page.
+# TODO: Make a Blog class with the necessary properties (i.e., an id, title, and body), then initialize your database:
+
+# (flask-env) $ python
+# from main import db, Blog
+# db.create_all()
+# db.session.commit()
+
+# TODO: /blog route displays all the blog posts.
+
+# TODO: submit a new post at the /newpost route
+
+# TODO: two templates, one each for the /blog (main blog listings) and /newpost (post new blog entry) views. Your templates should extend a base.html template which includes some boilerplate HTML that will be used on each page.
+
+# TODO:
+# TODO:
+# TODO:
+# TODO:
+# TODO:
+
+
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:introducingKat@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+
 
 
 class Blog(db.Model):
@@ -38,7 +62,19 @@ def index():
         tasks=tasks, completed_tasks=completed_tasks)
 
 
-@app.route('/delete-task', methods=['POST'])
+@app.route('/blog', methods=['POST'])
+def delete_task():
+
+    task_id = int(request.form['task-id'])
+    task = Blog.query.get(task_id)
+    task.completed = True
+    db.session.add(task)
+    db.session.commit()
+
+    return redirect('/')
+
+
+@app.route('/newpost', methods=['POST'])
 def delete_task():
 
     task_id = int(request.form['task-id'])
@@ -48,7 +84,5 @@ def delete_task():
     db.session.commit()
 
     return redirect('/')
-
-
 if __name__ == '__main__':
     app.run()

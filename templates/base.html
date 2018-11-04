@@ -3,17 +3,19 @@
     <head>
         <title>{{title}}</title>
     </head>
-    <nav>
-        <ul style="list-style:none;">
-            <li a href="main.py">Main Blog Page</li>
-            <li a href="entries.html">Add New Blog Entry</li>
-            <li></li>
-        </ul>
-    </nav>
+    <div>
+        <nav>
+            <ul style="list-style:none;">
+                <li a href="">Main Blog Page</li>
+                <li a href="entries.html">Add New Blog Entry</li>
+                <li></li>
+            </ul>
+        </nav>
+    </div>
 <body>
-
-    {% block content %}
-    {% endblock %}
-
+    <div class='container'>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

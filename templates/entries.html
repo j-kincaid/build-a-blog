@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>Write Your Story!</h1>
+{% block title %} {{ entry.title }} {% endblock %}
+
+    {% block body %}
+
+    <h1>My Blog!</h1>
     <form method='post'>
         <label>
-            New Blog:
+            New Entry:
             <input type="text" name='task' />
         </label>
         <input type="submit" value='Add Entry' />
