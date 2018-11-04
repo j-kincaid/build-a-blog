@@ -25,7 +25,7 @@ class Blog(db.Model):
 def index():
 
     if request.method == 'POST':
-        blog_name = request.form['blog']
+        blog_name = request.form['task']
         new_blog = Blog(blog_name)
         db.session.add(new_blog)
         db.session.commit()
