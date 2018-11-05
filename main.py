@@ -35,7 +35,7 @@ db = SQLAlchemy(app)
 class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    # The name is the column within task name
+    # The name is the column within word name
     name = db.Column(db.String(120))
     completed = db.Column(db.Boolean)
 
@@ -49,38 +49,38 @@ class Blog(db.Model):
 def index():
 
     if request.method == 'POST':
-        blog_name = request.form['task']
+        blog_name = request.form['word']
         new_blog = Blog(blog_name)
         db.session.add(new_blog)
         db.session.commit()
 
 # Change template name
 
-    tasks = Blog.query.filter_by(completed=False).all()
-    completed_tasks = Blog.query.filter_by(completed=True).all()
+    words = Blog.query.filter_by(completed=False).all()
+    completed_words = Blog.query.filter_by(completed=True).all()
     return render_template('entries.html',title="Build a Blog!", 
-        tasks=tasks, completed_tasks=completed_tasks)
+        words=words, completed_words=completed_words)
 
 
 @app.route('/blog', methods=['POST'])
-def delete_task():
+def add_entry():
 
-    task_id = int(request.form['task-id'])
-    task = Blog.query.get(task_id)
-    task.completed = True
-    db.session.add(task)
+    word_id = int(request.form['word-id'])
+    word = Blog.query.get(word_id)
+    word.completed = True
+    db.session.add(word)
     db.session.commit()
 
     return redirect('/')
 
 
 @app.route('/newpost', methods=['POST'])
-def delete_task():
+def delete_word():
 
-    task_id = int(request.form['task-id'])
-    task = Task.query.get(task_id)
-    task.completed = True
-    db.session.add(task)
+    word_id = int(request.form['word-id'])
+    word = word.query.get(word_id)
+    word.completed = True
+    db.session.add(word)
     db.session.commit()
 
     return redirect('/')

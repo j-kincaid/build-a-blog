@@ -4,21 +4,21 @@
     <h1>Get It Done!</h1>
     <form method='post'>
         <label>
-            New Task:
-            <input type="text" name='task' />
+            New word:
+            <input type="text" name='word' />
         </label>
-        <input type="submit" value='Add Task' />
+        <input type="submit" value='Add word' />
     </form>
 
     <hr />
 
-    {% if tasks|length == 0 %}
-    <p>No tasks yet</p>
+    {% if words|length == 0 %}
+    <p>No words yet</p>
     {% else %}
 
         <ul>
-            {% for task in tasks %}
-            <li>{{task}}</li>
+            {% for word in words %}
+            <li>{{word}}</li>
             {% endfor %}
         </ul>
 

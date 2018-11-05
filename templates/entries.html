@@ -8,20 +8,25 @@
     <form method='post'>
         <label>
             New Entry:
-            <input type="text" name='task' />
+            <input type="text" name='word' />
         </label>
         <input type="submit" value='Add Entry' />
     </form>
 
     <hr />
 
-    {% if task|length == 0 %}
+    {% if word|length == 0 %}
     <p>No entries yet</p>
     {% else %}
 
         <ul>
             {% for entry in entries %}
-            <li>{{task}}</li>
+            <li>{{word.name}}
+                <form method="POST" action="/delete-word" />
+                <input type="hidden" name="word-id" value= {{"word-id"}} />
+                <input type="submit" value="Done!">
+                </form>
+            </li>
             {% endfor %}
         </ul>
 
