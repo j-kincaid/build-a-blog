@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %} {{ entry.title }} {% endblock %}
+{% block content %} 
 
     {% block body %}
 
     <h1>My Blog!</h1>
     <form method='post'>
         <label>
-            New Entry:
             <input type="text" name='word' />
         </label>
-        <input type="submit" value='Add Entry' />
+        <input type="submit" value='Add post' />
     </form>
 
     <hr />
@@ -20,7 +19,8 @@
     {% else %}
 
         <ul>
-            {% for entry in entries %}
+            {% for post in entries %}
+            {% if %}
             <li>{{word.name}}
                 <form method="POST" action="/delete-word" />
                 <input type="hidden" name="word-id" value= {{"word-id"}} />
