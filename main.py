@@ -60,6 +60,20 @@ def add_entry():
     return render_template('newpost.html')
 
 
+@app.route('/', methods=['POST', 'GET'])
+def index():
+
+    if request.method == 'POST':
+        task_name = request.form['task']
+        new_task = Blog(post_name) # Create a new task object
+        db.session.add(new_post)
+        db.session.commit() # commit it to the db
+
+    posts = Blog.query.filter_by(completed=False).all() 
+    # only give me the tasks for which the completed column has the value False
+    new_posts = Task.query.filter_by(completed=True).all()
+    return render_template('newpost.html',title="Add a post!", blog=blog, new_posts=new_posts)
+
 
 @app.route('/newpost', methods=['POST'])
 def process_add_entry():
@@ -71,5 +85,7 @@ def process_add_entry():
     db.session.commit()
 
     return redirect('/')
+
+    
 if __name__ == '__main__':
     app.run()
