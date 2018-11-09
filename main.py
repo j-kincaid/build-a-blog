@@ -10,23 +10,15 @@ from flask_sqlalchemy import SQLAlchemy
 
 # TODO: two templates, one each for the /blog (main blog listings) and /newpost (post new blog entry) views. Your templates should extend a base.html template which includes some boilerplate HTML that will be used on each page.
 
-# TODO:
-# TODO:
-# TODO:
-# TODO:
-# TODO:
-
-
-
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:introducingKat@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
-
-
-# TODO: Make a Blog class with the necessary properties (i.e., an id, title, and body), then initialize your database with these:
+# TODO: Make a Blog class with the necessary properties (i.e., an id, title, and body)
+# 
+# TODO: Initialize your database with these:
 
 # (flask-env) $ python
 # from main import db, Blog
@@ -49,7 +41,7 @@ class Blog(db.Model):
 
 #     words = Blog.query.filter_by(completed=False).all()
 #     completed_words = Blog.query.filter_by(completed=True).all()
-#     return render_template('entries.html',title="Build a Blog!", 
+#     return render_template('newpost.html',title="Build a Blog!", 
 #         words=words, completed_words=completed_words)
 
 @app.route('/blog')
@@ -65,7 +57,7 @@ def add_entry():
         db.session.add(new_blog)
         db.session.commit()
 
-    return render_template('entries.html')
+    return render_template('newpost.html')
 
 
 
