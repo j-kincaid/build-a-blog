@@ -36,7 +36,7 @@ db = SQLAlchemy(app)
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # The name is the column within word name
-    title = db.Column(db.String(120))
+    title = db.Column(db.String(500))
     body = db.Column(db.Text)
 
 # Create a constructor: 
