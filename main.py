@@ -27,9 +27,9 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
-@app.route('/blog') # The blog route displays all posts.
-def index():
-    return render_template('blog.html')
+# @app.route('/blog') # The blog route displays all posts.
+# def index():
+#     return render_template('blog.html')
 
 @app.route('/blog', methods=['POST'])
 def add_entry():
@@ -40,22 +40,7 @@ def add_entry():
         db.session.add(new_post)
         db.session.commit()
 
-    return render_template('newpost.html')
-
-
-# @app.route('/', methods=['POST', 'GET'])
-# def index():
-
-#     if request.method == 'POST':
-#         task_name = request.form['task']
-#         new_task = Task(task_name) # Create a new task object
-#         db.session.add(new_task)
-#         db.session.commit() # commit it to the db
-
-#     tasks = Task.query.filter_by(completed=False).all() 
-#     # only give me the tasks for which the completed column has the value False
-#     completed_tasks = Task.query.filter_by(completed=True).all()
-#     return render_template('newpost.html',title="Get It Done!", tasks=tasks, completed_tasks=completed_tasks)
+    return render_template('newpost.html',title="Add a Post!", posts=posts, new_posts=new_posts)
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -63,15 +48,11 @@ def index():
 
     if request.method == 'POST':
         post_name = request.form['post']
-        new_post = Blog(post_name) # Create a new blog object
+        new_post = Blog(post_name) # Create a new post object
         db.session.add(new_post)
         db.session.commit() # commit it to the db
 
-    posts = Blog.query.filter_by(completed=False).all() 
-    # only give me the tasks for which the completed column has the value False
-    new_posts = Blog.query.filter_by(completed=True).all()
-    return render_template('newpost.html',title="Add a post!", posts=posts,  new_posts=new_posts)
-
+    return render_template('blog.html')
 
 @app.route('/newpost', methods=['POST']) # Submit your posts through '/newpost' 
 # After you submit, the main page is displayed.
@@ -87,4 +68,5 @@ def process_add_entry():
 
     
 if __name__ == '__main__':
+
     app.run()
