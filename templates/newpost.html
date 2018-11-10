@@ -18,16 +18,16 @@
 
     <hr />
 
-    {% if word|length == 0 %}
+    {% if blog|length == 0 %}
     <p>No entries yet</p>
     {% else %}
 
         <ul>
             {% for post in entries %}
             {% if %}
-            <li>{{word.name}}
+            <li>{{blog.name}}
                 <form method="POST" action="/newpost" />
-                <input type="hidden" name="word-id" value= {{"body"}} />
+                <input type="hidden" name="blog-id" value= {{"body"}} />
                 <input type="submit" value="Done!">
                 </form>
             </li>

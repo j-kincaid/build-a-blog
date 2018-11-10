@@ -1,15 +1,6 @@
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-
-# TODO: When a user submits a new post, redirect them to the main blog page.
-
-# TODO: /blog route displays all the blog posts.
-
-# TODO: submit a new post at the /newpost route
-
-# TODO: two templates, one each for the /blog (main blog listings) and /newpost (post new blog entry) views. Your templates should extend a base.html template which includes some boilerplate HTML that will be used on each page.
-
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:introducingKat@localhost:8889/build-a-blog'
@@ -27,7 +18,7 @@ db = SQLAlchemy(app)
 
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # The name is the column within word name
+    # The name is the column within blog name
     title = db.Column(db.String(500))
     body = db.Column(db.Text)
 
@@ -36,15 +27,7 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
-# @app.route('/', methods=['POST', 'GET'])
-# def index():
-
-#     words = Blog.query.filter_by(completed=False).all()
-#     completed_words = Blog.query.filter_by(completed=True).all()
-#     return render_template('newpost.html',title="Build a Blog!", 
-#         words=words, completed_words=completed_words)
-
-@app.route('/blog')
+@app.route('/blog') # The blog route displays all posts.
 def index():
     return render_template('blog.html')
 
@@ -52,36 +35,52 @@ def index():
 def add_entry():
 
     if request.method == 'POST':
-        blog_name = request.form['word']
-        new_blog = Blog(blog_name)
-        db.session.add(new_blog)
+        post_name = request.form['post']
+        new_post = Blog(post_name)
+        db.session.add(new_post)
         db.session.commit()
 
     return render_template('newpost.html')
+
+
+# @app.route('/', methods=['POST', 'GET'])
+# def index():
+
+#     if request.method == 'POST':
+#         task_name = request.form['task']
+#         new_task = Task(task_name) # Create a new task object
+#         db.session.add(new_task)
+#         db.session.commit() # commit it to the db
+
+#     tasks = Task.query.filter_by(completed=False).all() 
+#     # only give me the tasks for which the completed column has the value False
+#     completed_tasks = Task.query.filter_by(completed=True).all()
+#     return render_template('newpost.html',title="Get It Done!", tasks=tasks, completed_tasks=completed_tasks)
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
     if request.method == 'POST':
-        task_name = request.form['task']
-        new_task = Blog(post_name) # Create a new task object
+        post_name = request.form['post']
+        new_post = Blog(post_name) # Create a new blog object
         db.session.add(new_post)
         db.session.commit() # commit it to the db
 
     posts = Blog.query.filter_by(completed=False).all() 
     # only give me the tasks for which the completed column has the value False
-    new_posts = Task.query.filter_by(completed=True).all()
-    return render_template('newpost.html',title="Add a post!", blog=blog, new_posts=new_posts)
+    new_posts = Blog.query.filter_by(completed=True).all()
+    return render_template('newpost.html',title="Add a post!", posts=posts,  new_posts=new_posts)
 
 
-@app.route('/newpost', methods=['POST'])
+@app.route('/newpost', methods=['POST']) # Submit your posts through '/newpost' 
+# After you submit, the main page is displayed.
 def process_add_entry():
 
-    word_id = int(request.form['word-id'])
-    word = word.query.get(word_id)
-    word.completed = True
-    db.session.add(word)
+    post_id = int(request.form['post-id'])
+    post = post.query.get(post_id)
+    post.completed = True
+    db.session.add(post)
     db.session.commit()
 
     return redirect('/')
