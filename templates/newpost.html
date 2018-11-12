@@ -2,37 +2,89 @@
 
 {% block content %} 
 
-    {% block body %}
+    <h1>Add a Blog Entry</h1>
+
+    <form method='POST'>
+        <label>Title for your new blog:
+            <input type="text" name="title" />
+        </label>
+        <label>View your new blog
+            <input type="text" name='blog' />
+        </label>
+        <input type="submit" value='Add Entry' />
+    </form>
+    <hr />{% extends "base.html" %}
+
+{% block content %} 
 
     <h1>Add a Blog Entry</h1>
-    <form method='post'>
-        <label>
-            <input type="text" name="Title for your new blog:" />
-        </label>
-        <label>
-            <input type="textarea" name='View your new blog' />
-        </label>
-        <input type="submit" value='Add post' />
 
+    <form method='POST'>
+        <label>Title for your new blog:
+            <input type="text" name="title" />
+        </label>
+        <label>View your new blog
+            <input type="text" name='body' />
+        </label>
+        <input type="submit" value='Add Entry' />
     </form>
-
     <hr />
 
-    {% if blog|length == 0 %}
+    {% if blogs|length == 0 %}
     <p>No entries yet</p>
     {% else %}
 
         <ul>
-            {% for post in entries %}
-            {% if %}
+            {% for blog in blogs %}
+            
             <li>{{blog.name}}
-                <form method="POST" action="/newpost" />
-                <input type="hidden" name="blog-id" value= {{"body"}} />
-                <input type="submit" value="Done!">
+                <form method="POST" action="/newpost" style="display:inline-block;" />
+                <input type="text" name="blog-id" value= "{{blog.id}}" />
+                <input type="submit" value="Add Blog">
                 </form>
             </li>
             {% endfor %}
         </ul>
-
     {% endif %}
+
+    <hr />
+
+    <h2>Entries</h2>
+
+    <ul>
+        {% for blog in blogs %}
+        <li>{{blog.name}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+
+    {% if blogs|length == 0 %}
+    <p>No entries yet</p>
+    {% else %}
+
+        <ul>
+            {% for blog in blogs %}
+            
+            <li>{{blog.name}}
+                <form method="POST" action="/newpost" style="display:inline-block;" />
+                <input type="text" name="blog-id" value= "{{blog.id}}" />
+                <input type="submit" value="Add Blog">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <hr />
+
+    <h2>Entries</h2>
+
+    <ul>
+        {% for blog in blogs %}
+        <li>{{blog.name}}</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
