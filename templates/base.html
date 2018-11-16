@@ -4,14 +4,13 @@
         <title>{{title}}</title>
     </head>
 <body>
-
-    {% block content %}
-    <!-- <nav>
+    <nav>
         <ul>
-            <li a href="blog.html">Main Blog Page</li>
-            <li a href="newpost.html">Add a Post!</li>
+            <li><a href='/'>Main Blog Page</a></li>
+            <li><a href='/newpost'>Add a Post!</a></li>
         </ul>
-    </nav> -->
+    </nav> 
+    {% block content %}
     {% endblock %}
 
 </body>
