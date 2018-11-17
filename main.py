@@ -55,10 +55,12 @@ def process_add_entry():
             title_error = 'You must enter a title.'
         if not body:
             body_error = 'You must enter a blog post.'
-        if not title_error and not body_error:
+        if not title_error and not body_error: 
             return redirect('/')
     return render_template('newpost.html', title=title, title_error=title_error, body_error=body_error)
     
+
+
 
     # def register():
     # if request.method == 'POST': # Create a new user, looking at register.html
