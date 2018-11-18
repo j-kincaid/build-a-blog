@@ -58,8 +58,9 @@ def process_add_entry():
         if not body:
             body_error = 'You must enter a blog post.'
         if not title_error and not body_error: 
-            return redirect(url_for('index',id=new_blog.id))
             db.session.commit()
+            return redirect(url_for('index',id=new_blog.id))
+           
     return render_template('newpost.html', title=title, body=body, title_error=title_error, body_error=body_error)
     
 
