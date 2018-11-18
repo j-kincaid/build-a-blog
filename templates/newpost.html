@@ -2,6 +2,23 @@
 
 {% block content %} 
 
+<body>
+<!-- 
+    <style>
+        body {
+            margin: 0 auto;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            line-height: 1.5;
+            padding: 4em 1em;
+            margin-left: 10%;
+            }
+        h1 {
+            margin: 0 auto;
+            max-width: 50em;
+            margin: .5em;
+        }
+    </style> -->
+    
     <h1>Add a Blog Entry</h1>
 
     <form action='/newpost'  method='POST'>
@@ -13,10 +30,11 @@
         <label>Write your thoughts:
         </label> 
         <br />
-        <textarea rows="6" cols="40" name='body'></textarea><span class="error" style="color:red;" >{{body_error}}</span>
+        <textarea rows="6" cols="40" name='body'>{{body}}</textarea><span class="error" style="color:red;" >{{body_error}}</span>
         <br />
         <input type="submit" value='Add Entry' />
     </form>
    
+</body>
 
 {% endblock %}

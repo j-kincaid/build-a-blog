@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask import url_for
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -12,6 +13,7 @@ class Blog(db.Model): # Create an instance of the Blog class
     #The name is the column within blog name
     title = db.Column(db.String(500)) # Creates a property that will map to a column of type VARCHAR(120) in the blog table.
     body = db.Column(db.String(2000))
+    # added = db.Column(db.Boolean)
 
 # Create a constructor: 
     def __init__(self, title, body):
@@ -42,11 +44,12 @@ def process_add_entry():
     title_error = ''
     body_error = ''
     title = ''
+    body = ''
     if request.method == 'POST': # Create a new post
         
         title = request.form['title']
         body = request.form['body']
-        
+#        added = request.form['added']
         new_blog = Blog(title, body)
         db.session.add(new_blog)
         db.session.commit()
@@ -56,10 +59,9 @@ def process_add_entry():
         if not body:
             body_error = 'You must enter a blog post.'
         if not title_error and not body_error: 
-            return redirect('/')
-    return render_template('newpost.html', title=title, title_error=title_error, body_error=body_error)
+            return redirect(url_for('index',id=new_blog.id))
+    return render_template('newpost.html', title=title, body=body, title_error=title_error, body_error=body_error)
     
-
 
 
     # def register():
@@ -79,7 +81,7 @@ def process_add_entry():
     #         session['email'] = email
     #         return redirect('/')
     #     else:
-    #         # TODO - better response message
+    #         # TODO - more specific response message
     #         return "<h1>Duplicate User</h1>"
 
     # return render_template('register.html')

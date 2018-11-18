@@ -1,8 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-      <h1>Selected Blog Entry</h1>
+<!doctype html>
+<html>
+  <body>
+      <style>
+          body {
+              margin: 0 auto;
+              font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+              padding: 4em 1em;
+              margin-left: 10%;
+              }
+          h1 {
+              margin: 0 auto;
+              margin: .5em;
+          }
+          p {
+          }
+      </style>
       </h1>{{blog.title}}</h1>
         <p>{{blog.body}}</p>
-
-
+  </body>
+</html>
 {% endblock %}
